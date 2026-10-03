@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+set -eu
+VER=8.9
+DIR="$HOME/.gradle/ctstock-gradle-$VER"
+ZIP="$HOME/.gradle/gradle-$VER-bin.zip"
+if [ ! -x "$DIR/gradle-$VER/bin/gradle" ]; then
+  mkdir -p "$DIR" "$(dirname "$ZIP")"
+  if [ ! -f "$ZIP" ]; then
+    echo "Downloading Gradle $VER..."
+    curl -fL --retry 3 -o "$ZIP" "https://services.gradle.org/distributions/gradle-$VER-bin.zip"
+  fi
+  unzip -q -o "$ZIP" -d "$DIR"
+fi
+exec "$DIR/gradle-$VER/bin/gradle" "$@"
