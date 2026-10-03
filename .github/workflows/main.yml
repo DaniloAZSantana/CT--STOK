@@ -1,0 +1,8 @@
+name: Gerar APK CT Stock
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
